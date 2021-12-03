@@ -1,0 +1,129 @@
+{% extends "dropoff/base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html> 
+<head> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+  <title>Google Maps Multiple Markers</title> 
+  <script src="http://maps.google.com/maps/api/js?sensor=false" 
+          type="text/javascript"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head> 
+<body>
+  <h2 style=" width: 150%; text-align: center;">Select a  DropOff Location</h2><br/>
+ <div style=" width: 150%;">
+  <div id="map" style="width: 60%; height: 400px; float: left;">
+   
+
+ <script type="text/javascript">
+    var locations = [
+      ['Giving Hope #1','FIU MMC Librabry','1200 SW 8th St, Miami, FL 33199', 25.757542006388846, -80.37404380275197, 4],
+      ['Giving Hope #2','FIU Engineering Campus','10555 W Flagler St, Miami, FL 33174', 25.770082518387763, -80.36801209963541, 5],
+      ['Giving Hope #5','University Of Miami','1320 S Dixie Hwy, Coral Gables, FL 33146', 25.719655533717294, -80.27515505304639, 3],
+      ['Giving Hope #6','Dadeland Mall','7535 N Kendall Dr, Miami, FL 33156', 25.690617451071763, -80.30920152193298, 2],
+      ['Giving Hope #7','City Place Doral','8300 NW 36th St, Doral, FL 33166', 25.807905780865724, -80.33131901658213, 1],
+      ['Giving Hope #3','FIU Biscayne Bay Campus','3000 NE 151st St, North Miami, FL 33181', 25.908662533078594, -80.14019447264442, 6],
+      ['Giving Hope #4','FIU Broward Campus','2030 SW 145th Ave, Miramar, FL 33027', 25.99227118201107, -80.33981177449004, 7],
+      ['Giving Hope #8','Doral Glades park','7600 NW 98th Pl, Doral, FL 33178', 25.84428543324831, -80.35936687155629, 8]
+     
+    ];
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: new google.maps.LatLng(25.91124146304521, -80.28214428440454),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+    
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][3], locations[i][4]),
+        map: map
+      });
+
+      
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+         // infowindow.open(map, marker);
+          document.getElementById('result1').value =  (locations[i][0]);
+          document.getElementById('result2').value =  (locations[i][1]);
+          document.getElementById('result3').value =  (locations[i][2]);
+          $("div.map").show();
+        }
+      })(marker, i));
+    }
+  </script>
+  <script type="text/javascript">
+        $(document).ready(function() {
+        $("div.addr").hide();
+        $("div.map").hide();
+        $("input[name$='radaddr']").click(function() {
+            var test = $(this).val();
+            var em = $("input[name$='emailname']").val();
+           if(test == "showbtn1")
+           {
+            
+            $("div.addr").hide();
+            $("#" + test).show();
+            $("input[name$='reslut1']").prop("required", true);
+            $("input[name$='emailname']").prop("required", true);
+            $("input[name$='emailto']").prop("required", true);
+            $("input[name$='phonename']").prop("required", false);
+            $("input[name$='phone']").prop("required", false);
+           }
+           else
+           {
+            
+            $("div.addr").hide();
+            $("#" + test).show();
+            $("input[name$='emailname']").prop("required", false);
+            $("input[name$='emailto']").prop("required", false);
+            $("input[name$='phonename']").prop("required", true);
+            $("input[name$='phone']").prop("required", true);
+
+           }
+              // $("input.form-control").removeAttr('required');
+              // $("#" + test).attr('required');
+            
+            
+        });
+    });
+  </script>
+  </div>
+  <form class="" method="POST" action="">
+    {% csrf_token %}
+    <h5 style="float: left; margin-left: 5%;">Location:</h5>
+    <div style="float: left; margin-left: 5%; margin-top: 1%; width: 30%; border: solid;">
+        <!-- <textarea id="result-textarea" name="result">
+        </textarea> -->
+        
+        <input id="result1" name="result1" style="border:none; width: 100%;" readonly ><br/>
+        <input id="result2" name="result2" style="border:none; width: 100%;" readonly><br/>
+        <input id="result3" name="result3" style="border:none; width: 100%;" readonly> <br/>
+    </div>
+    <div class="map" style="float: left; margin-left: 5%; margin-top: 1%;" >
+       <b>Send Address</b> <input type="radio" name= "radaddr"  value="showbtn1"> Email
+        <input type="radio" name= "radaddr" value="showbtn2"> Text <br/>
+   
+    </div> 
+    
+    <div class="addr" id="showbtn1" style="float: left; margin-left: 5%; margin-top: 1%; " >
+        Enter Name:<input  name='emailname' type="text" class="form-control" id="EmailName" > <br/>
+        Enter Email Id:<input  name='emailto' type="email" class="form-control" id="Email1" > <br/>
+        <input type="submit" value="Email Address" >
+    </div>
+    <div  class="addr" id="showbtn2" style="float: left; margin-left: 5%; margin-top: 1%;">
+        Enter Name:<input name='phonename' type="text" class="form-control" id="PhoneName" > <br/>
+        Enter Mobile #:<input name='phone' type="text" maxlength="10" pattern="\d{10}"  class="form-control" id="Phone1"  oninvalid="this.setCustomValidity('Enter 10-Digit phone number')"
+        oninput="this.setCustomValidity('')"/> <br/>
+        <input type="submit"  value="Text Address" >
+    </div>
+  </form>
+</div>
+</body>
+</html>
+{% endblock content %}

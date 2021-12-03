@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os 
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,13 +37,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    
 
     # External
     'crispy_forms',
+    'bootstrap_datepicker_plus',
+     "bootstrap4",
 
     # Custom
     'giving_hope.apps.core',
+    'giving_hope.apps.payment',
+    'giving_hope.apps.pickup',
+    'giving_hope.apps.dropoff',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -125,7 +134,40 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
+
+STATIC_ROOT =os.path.join(BASE_DIR, "static_cdn")
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+if DEBUG:
+
+    SECRET_KEY = 'sk_test_51K09uZI9TcM8gxWfSrdcd3BFoRa5LLrJi7MFIsIlMVjshDVlmmg6cKcbTMkPkqdlkaQbrEnO9RC1eM3uraPVJd1E00K1wyuUC5'
+    #STRIPE_PUBLISHABLE_KEY = 'pk_test_51K09uZI9TcM8gxWfn9dD1AGx2eWQTALpE3mjPw3iRHEY4dcSuGMeKfd88eU3UFYV7AyurrAK2D6ditjiK2NwhTX100FiYFn0VQ'
+
+#EmailBAckend Information
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'givinghopeproj@gmail.com'
+EMAIL_HOST_PASSWORD = 'Givinghope1$'
+EMAIL_PORT = 587
+
+#google API Key 
+google_api_key ='AIzaSyCzRTvETqU5OAJSSadYEllVNKHdbqVZji0'
+
+
+
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+TWI_AUTH ='458049acfb5ca17b1f472e8cbe2d0af6'
+TWI_PASS ='givinghopeproj@gmail.com''Givinghope1$@33174'

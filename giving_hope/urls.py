@@ -19,4 +19,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('giving_hope.apps.core.urls')),
+    path('payment/', include('giving_hope.apps.payment.urls')),
+    path('pickup/', include('giving_hope.apps.pickup.urls')),
+    path('dropoff/', include('giving_hope.apps.dropoff.urls')),
 ]
