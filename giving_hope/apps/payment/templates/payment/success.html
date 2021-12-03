@@ -8,15 +8,17 @@
 </head>
 
 <body>
-  
+  <form action="{% url 'index' %}" method="POST" >
+    {% csrf_token %}
   <section>
     
     <p>
-      We appreciate your business! 
+      Thank you for the Donation!
       <!-- <a href="mailto:orders@example.com">orders@example.com</a>. -->
     </p>
-    
+    <input type="submit" value="Want to Donate more!"  />
   </section>
+</form>
 </body>
 </html>
 
