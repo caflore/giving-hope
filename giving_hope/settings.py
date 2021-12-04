@@ -43,7 +43,10 @@ INSTALLED_APPS = [
 
     # Custom
     'giving_hope.apps.core',
+    'giving_hope.apps.comment_review',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
