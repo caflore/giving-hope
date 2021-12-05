@@ -40,10 +40,15 @@ INSTALLED_APPS = [
 
     # External
     'crispy_forms',
+    'compressor',
 
     # Custom
     'giving_hope.apps.core',
 ]
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-css', 'django_libsass.SassCompiler'),
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -125,7 +130,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_FINDERS = (
+    'compressor.finders.CompressorFinder',
+)
+
+STATIC_ROOT = './giving_hope/apps/core/static'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'core-login'
