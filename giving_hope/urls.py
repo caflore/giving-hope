@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from .apps.comment_review import views
 from django.urls import path, include
 
 urlpatterns = [
@@ -22,4 +23,5 @@ urlpatterns = [
     path('payment/', include('giving_hope.apps.payment.urls')),
     path('pickup/', include('giving_hope.apps.pickup.urls')),
     path('dropoff/', include('giving_hope.apps.dropoff.urls')),
+    path('comments/', include('giving_hope.apps.comment_review.urls'))
 ]

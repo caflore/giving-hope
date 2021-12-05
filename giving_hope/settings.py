@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'giving_hope.apps.payment',
     'giving_hope.apps.pickup',
     'giving_hope.apps.dropoff',
+    'giving_hope.apps.comment_review',
 ]
 
 COMPRESS_PRECOMPILERS = (
