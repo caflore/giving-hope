@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+<script src="https://js.stripe.com/v3/"></script>
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Giving Hope | Donate to Our Cause</title>
+{% endblock title %}
+
+{% block content %}
+<div>
+    <div class = "row">
+        <div class="col-md bg-info rounded">
+            <h1>Donate to {{title}}</h1>
+            <p>By {{name}}</p>
+            <p>Posted on {{posted_on}}</p>
+            <p>{{content}}</p>
+        </div>
+        <div class="col-md">
+            <p>Donation Payment with Stripe</p>
+        </div>
+        
+    </div>
+</div>
+{% endblock content %}

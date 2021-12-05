@@ -52,6 +52,9 @@ INSTALLED_APPS = [
     'giving_hope.apps.pickup',
     'giving_hope.apps.dropoff',
     'giving_hope.apps.comment_review',
+    'giving_hope.apps.donation',
+    'giving_hope.apps.newsfeed',
+    'giving_hope.apps.users',
 ]
 
 COMPRESS_PRECOMPILERS = (
@@ -185,3 +188,9 @@ google_api_key ='AIzaSyCzRTvETqU5OAJSSadYEllVNKHdbqVZji0'
 
 TWI_AUTH ='458049acfb5ca17b1f472e8cbe2d0af6'
 TWI_PASS ='givinghopeproj@gmail.com''Givinghope1$@33174'
+LOGIN_REDIRECT_URL = 'newsfeed-home'
+
+LOGIN_URL = 'login'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media./'

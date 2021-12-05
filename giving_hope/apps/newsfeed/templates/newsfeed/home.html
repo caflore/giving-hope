@@ -1,0 +1,78 @@
+{% extends "newsfeed/base.html" %}
+{% load static %}
+{% block content %}
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+
+  <!-- The slideshow -->
+  <div class="carousel-inner" style=" width:100%; height: 500px !important;">
+    <div class="carousel-item active">
+      <div class="d-flex justify-content-center">
+        <img
+          src="https://global.unitednations.entermediadb.net/assets/mediadb/services/module/asset/downloads/preset/Collections/Embargoed/31-08-2021_WFP_Afghanistan-03.jpg/image1170x530cropped.jpg"
+          alt="Los Angeles">
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="d-flex justify-content-center">
+        <img
+          src="https://www.aljazeera.com/wp-content/uploads/2021/08/INTERACTIVE-Afghanistan-humanitarian-crisis.png?resize=1200%2C630"
+          alt="Chicago">
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://borgenproject.org/wp-content/uploads/humanitarian-crises.jpg" alt="New York">
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+
+</div>
+<div class="container">
+  {% for organization in organizations %}
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <h1><a href="{% url 'post-detail' organization.id %}">{{organization.title}}</a></h1>
+        <h4>{{organization.subtitle}}</h4>
+        <p>By {{organization.organization}} on {{organization.date_posted|date:"F d, Y"}}</p>
+        <p>{{organization.content|truncatewords:50}} </p>
+      </div>
+    </div>
+  </article>
+  {% endfor %}
+  {% if is_paginated %}
+    {% if page_obj.has_previous %}
+      <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+    
+
+  {% endif %}
+  
+</div>
+{% endblock %}
