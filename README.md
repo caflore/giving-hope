@@ -15,7 +15,7 @@ Add description.
 
 # Get Started
 
-* Install pyhton
+* Install python
 
 * Install virtualenv
     *   ```
