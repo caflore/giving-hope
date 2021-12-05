@@ -1,0 +1,188 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Information Form</title>
+   
+  
+    <script type="text/javascript">
+
+      var google_api_key = "{{google_api_key|safe}}";
+  
+    </script>
+  
+    <script src="{% static 'pickup/google_places.js' %}"></script>
+    <script> 
+    var today = new Date();
+            var time = today.getHours();
+            if ( time > 18 ) {
+              $(function() {
+                  $('.datepicker').datepicker({
+                    
+                    ateFormat: "dd/mm/yy",
+                    changeMonth: true,
+                    changeYear: true,
+                    ignoreReadonly: true,
+                    minDate: 'now+1'
+          
+                  });
+              });
+            }
+            else{
+              $(function() {
+                  $('.datepicker').datepicker({
+                    
+                    ateFormat: "dd/mm/yy",
+                    changeMonth: true,
+                    changeYear: true,
+                    ignoreReadonly: true,
+                    minDate: 'now'
+          
+                  });
+              });
+            }
+  </script>
+  <script>
+    function myFunction() {
+           var a= document.getElementById("zip").value;
+           
+           if (a > 32000 & a < 35000)
+           {
+
+           }
+           else
+           { 
+               ziperror ="We apologize for the inconvinience, we do not provide pickup for the zip code entered";
+               
+               alert(ziperror);
+               return false;
+           }
+     }
+  </script>
+  
+  </head>
+  <body>
+    <!-- <script>
+      window.onclick = function() {
+      //  var getInput = prompt("Hey type something here: ");
+        var getInput = document.getElementById("Fname").value
+        localStorage.setItem("storageName",getInput);
+      }
+    </script> -->
+
+      <!-- As a heading -->
+    <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">PickUpMyDonation</span>
+    </div>
+    </nav>
+    <h2 class="text-center">Pickup Information Form</h2> 
+<div class="conatiner">
+    <div  style="margin-left: 2%; float: left; width: 35%;" >
+        <form id="frmTest" class="" method="POST" action="{% url 'pickup-thanks' %}">
+         
+            {% csrf_token %}
+            <!-- <div class="form-group">
+                <label for="Fname">First Name*</label>
+                <input name1='Fname' type="text"  id="Fname" class="form-control" placeholder="FirstName">
+               
+                <label for="Lname">Last Name*</label>
+                <input name2='Lname' type="text"  id="Lname" class="form-control" placeholder="LastName">
+                
+                <label for="exampleInputEmail1">Email address*</label>
+                <input name='email' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          
+                <label for="phone_number">Phone Number*</label>
+                <input number='phone_number' type="interger"  id="phone_number" class="form-control">
+
+                <label for="address">Address</label>
+                <textarea  name='address' class="form-control" id="address" name="address" placeholder="Enter Your Address"></textarea>
+                <input type="submit" class="btn btn-success btn-lg mt-1 ml-4" value="Submit" id="add" form= frmTest>
+               
+            </div> -->
+            <div style="float: left; width: 90%; margin-left: 2%;">
+              <label for="Fname">Full Name*</label>
+              <input name='Fname' type="text"  id="Fname" class="form-control" placeholder="Full Name" required>
+            </div>
+              
+              <div style="float: left; width: 90%;margin-left: 2%;"> 
+              <label for="exampleInputEmail1">Email address*</label>
+              <input name='email' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email ID" required>
+            </div>
+            <div style="float: left; width: 90%;margin-left: 2%;"> 
+              <label for="phone_number">Phone Number*</label>
+                <input name='phone_number' type="text"  id="phone_number" class="form-control" maxlength="10" pattern="\d{10}"   oninvalid="this.setCustomValidity('Enter 10-Digit phone number')"
+                oninput="this.setCustomValidity('')" placeholder="Phone Number" required/>
+            </div>
+            <div style="float: left; width: 90%;margin-left: 2%;"> 
+              <!-- <label for="address">Address</label>
+              <input type="text"  name='address' class="form-control" id="address" name="address" placeholder="Enter Your Address" required></textarea> -->
+              <label for="id-google-address">Address</label>
+              <input type="text" placeholder="*Begin typing address" id="id-google-address" name="google_address" class="form-control">
+            </div>
+            <div style="float: left; width: 90%;margin-left: 2%;"> 
+              <label for="address">Apt/Suite/Other</label>
+              <input type="text"  name='apt' class="form-control" id="apt" name="apt" placeholder="Apt/Suite/Other" required>
+            </div>
+            <div style="float: left; width: 44%;margin-left: 2%;"> 
+              <label for="address">City</label>
+              <input type="text"  name='city' class="form-control" id="city" name="city" placeholder="City" required>
+            </div>
+            <div style="float: left; width: 44%;margin-left: 2%;"> 
+              <label for="address">State</label>
+              <input type="text"  name='state' class="form-control" id="state" name="state" placeholder="State" required></textarea>
+            </div>
+            <div style="float: left; width: 90%;margin-left: 2%;"> 
+              <label for="address">Zip</label>
+              <input type="text"  name='zip' class="form-control" id="zip" name="zip" placeholder="Zip" maxlength="5" pattern="\d{5}" required></textarea>
+            </div>
+    </div>
+    <div  style="margin-left: 2%; margin-top: 5%;  float: left; width: 55%; " >
+      <div style="width: 30%; height: 15%; float: left;"> 
+        <p>Preferred Option Date 1:* <input name='id_date1' class="datepicker form-control" type="text" id="id_date1" required onkeydown="return false" autocomplete="off"></p>
+        <p><input  type="radio" name="rad1" id="time1_1" required value="8:00AM - 11:00AM"> 8:00AM - 11:00AM </p>
+        <p><input  type="radio" name="rad1" id="time1_2" value="12:00PM - 3:00PM"> 12:00PM - 3:00PM </p>
+        <p><input  type="radio" name="rad1" id="time1_3" value="3:00PM - 6:00PM"> 3:00PM - 6:00PM </p>
+     </div>
+    <div style="width: 30%; margin-left: 5% ; height: 15%; float: left;"> 
+        <p>Preferred Option Date 2:* <input name='id_date2' class="datepicker form-control" type="text" id="id_date2" required onkeydown="return false" autocomplete="off"></p>
+        <p><input  type="radio" name="rad2" id="time2_1" required value="8:00AM - 11:00AM"> 8:00AM - 11:00AM </p>
+        <p><input  type="radio" name="rad2" id="time2_2" value="12:00PM - 3:00PM"> 12:00PM - 3:00PM </p>
+        <p><input  type="radio" name="rad2" id="time2_3" value="3:00PM - 6:00PM"> 3:00PM - 6:00PM </p>
+     </div>
+     <div style="width: 30%;margin-left: 5% ; height: 15%; float: left;"> 
+        <p>Preferred Option Date 3:* <input name='id_date3' class="datepicker form-control" type="text" id="id_date3" required onkeydown="return false" autocomplete="off"></p>
+        <p><input  type="radio" name="rad3" id="time3_1" required value="8:00AM - 11:00AM"> 8:00AM - 11:00AM </p>
+        <p><input  type="radio" name="rad3" id="time3_2" value="12:00PM - 3:00PM"> 12:00PM - 3:00PM </p>
+        <p><input  type="radio" name="rad3" id="time3_3" value="3:00PM - 6:00PM"> 3:00PM - 6:00PM </p>
+     </div>
+     <div style="width: 100%;margin-left: 20% ; margin-top: 10% ; float: left;"> 
+     <input type="submit"  value="Submit" style="width: 40%;" class="btn btn-success btn-lg mt-1 ml-4" onclick="myFunction()">
+    </div>
+    </div>
+  </form>
+  </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

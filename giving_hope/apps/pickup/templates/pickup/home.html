@@ -1,0 +1,38 @@
+{% extends "pickup/base.html" %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    function myFunction() {
+           var a= document.getElementById("zip").value;
+           if (a > 32000 & a< 35000)
+           {
+
+           }
+           else
+           { 
+               ziperror ="We apologize for the inconvinience, we do not provide pickup for the zip code entered";
+               document.getElementById("ziperror").value = ziperror;
+               
+               alert(ziperror);
+               return false;
+           }
+    }
+</script>
+
+<h2 style=" width: 150%; text-align: center;">Enter Your Zipcode </h2><br/>
+    <div class="conatiner text-white"; style="padding: 25% 10% 10% 50%;">
+        <form action="{% url 'pickup-form' %}" method="get" onsubmit="return myFunction()">
+            {% csrf_token %} 
+            <input type="number" name="q" id='zip' placeholder="EnterZipCode" required>
+            <!-- <button onclick="window.location.href='/ContactInfo.html'">Search</button>   -->
+            <button onclick=myFunction()>Search</button> 
+            <label id="ziperror" ></label>
+
+
+        </form>
+    </div>
+
+    
+
+{% endblock content %}
+

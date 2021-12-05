@@ -7,6 +7,8 @@ Add description.
 
 * **[Get Started](#get-started)**
 
+* **[Install packages](#install-package)**
+
 * **[Create App](#create-app)**
 
 * **[Useful Links](#useful-links)**
@@ -25,6 +27,40 @@ Add description.
         pip3 install virtualenv
         ```
 
+# Install Packages
+
+* Install stripe
+```
+   pip install stripe
+ ```
+ 
+ * Install Bootstrap4/5
+  ```
+       pip install django-bootstrap4
+  ```
+  Add to INSTALLED_APPS in your settings.py file.
+  ```
+     INSTALLED_APPS = [
+           .... ,
+           "bootstrap4",
+           ...,
+       ]
+   ```
+ 
+ * Install datepicker
+  ```
+       pip install django-bootstrap-datepicker-plus
+  ```
+  Add bootstrap_datepicker_plus to the list of INSTALLED_APPS in your settings.py file.
+  ```
+     INSTALLED_APPS = [
+           .... ,
+           'bootstrap_datepicker_plus',
+       ]
+   ```
+  
+
+
 ## MacOS/Linux
 
 * Navigate to desired directory.
@@ -34,7 +70,7 @@ git clone https://github.com/caflore/giving-hope
 cd giving-hope
 python3 -m virtualenv venv
 source venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements.txt 
 python manage.py runserver
 ```
 
