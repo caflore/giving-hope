@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block title%}
-<title>Giving Hope | Sign-Up</title>
+<title>Giving Hope | Donate</title>
 {% endblock title%}
 
 {% block content %}
@@ -11,16 +11,13 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4 mt-4"><strong>Join Today</strong></legend>
+                <legend class="border-bottom mb-4 mt-4"><strong>Donate Today</strong></legend>
                 {{ form|crispy}}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info mb-4 mt-4" type="submit">Sign Up</button>
+                <button class="btn btn-outline-info mb-4 mt-4" type="submit">Donate</button>
             </div>
         </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">Already have an account? <a href="{% url 'core-login' %}">Sign in</a></small>
-        </div>
     </div>
 </div>
 {% endblock content %}

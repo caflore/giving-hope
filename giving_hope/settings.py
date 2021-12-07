@@ -41,9 +41,16 @@ INSTALLED_APPS = [
     # External
     'crispy_forms',
     'compressor',
+    'phonenumber_field',
+    'localflavor',
+    'django_countries',
+    'djmoney',
 
     # Custom
     'giving_hope.apps.core',
+    'giving_hope.apps.donations',
+    'giving_hope.apps.reviews',
+    'giving_hope.apps.newsfeed',
 ]
 
 COMPRESS_PRECOMPILERS = (
@@ -132,6 +139,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
 STATIC_ROOT = './giving_hope/apps/core/static'
@@ -145,3 +153,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'core-login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'givinghopeproj@gmail.com'
+EMAIL_HOST_PASSWORD = 'Givinghope1$'
+EMAIL_PORT = 587
