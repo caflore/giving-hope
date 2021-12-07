@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title%}
+<title>Giving Hope | Donate</title>
+{% endblock title%}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-6 offset-md-3">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4 mt-4"><strong>Donate Today</strong></legend>
+                {{ form|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info mb-4 mt-4" type="submit">Donate</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

@@ -7,20 +7,20 @@
 {% block content %}
 <div class="container overflow-scroll">
     <legend class="border-bottom mb-4 mt-4"><strong>Organizations</strong></legend>
-    {% for org in orgs.organizations.organization %}
+    {% for org in orgs %}
     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-primary">{{ org.country }}</strong>
+            <strong class="d-inline-block mb-2 text-primary">{{ org.location }}</strong>
             <h3 class="mb-0">{{ org.name }}</h3>
-            <div class="mb-1 text-muted">Active Projects: {{ org.activeProjects }}</div>
+            <div class="mb-1 text-muted">Active Projects: {{ org.active_projects }}</div>
             <p class="card-text mb-auto">{{ org.mission|truncatewords:"100" }}</p>
             <a href="{{ org.url }}" class="stretched-link mt-2" target="_blank">Learn more</a>
             <div>
-                <a class="btn btn-outline-primary mt-4" href="">Donate</a>
+                <a class="btn btn-outline-primary mt-4" href="{% url 'donations-payment' %}">Donate</a>
             </div>
         </div>
         <div class="col-auto d-none d-lg-block">
-            <img class="bd-placeholder-img"  src="{{ org.logoUrl }}" width="300" height="100%" role="img" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <img class="bd-placeholder-img"  src="{{ org.logo_url }}" width="300" height="100%" role="img" preserveAspectRatio="xMidYMid slice" focusable="false">
         </div>
     </div>
     {% endfor %}
