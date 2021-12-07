@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title%}
+<title>Giving Hope | {{ review.title }}</title>
+{% endblock title%}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-6 offset-md-3">
+        
+        <legend class="border-bottom mb-4 mt-4"><strong>{{ review.title }}</strong> | {{ review.id }}</legend>
+        <p>{{ review.content }}</p>
+        <a class="btn btn-outline-primary mt-4" href="{% url 'review-update' review.id %}">Edit</a>
+            <a class="btn btn-outline-primary mt-4" href="{% url 'review-delete' review.id %}">Delete</a>
+    </div>
+</div>
+{% endblock content %}

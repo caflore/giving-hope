@@ -41,9 +41,14 @@ INSTALLED_APPS = [
     # External
     'crispy_forms',
     'compressor',
+    'phonenumber_field',
+    'localflavor',
 
     # Custom
     'giving_hope.apps.core',
+    'giving_hope.apps.donations',
+    'giving_hope.apps.reviews',
+    'giving_hope.apps.newsfeed',
 ]
 
 COMPRESS_PRECOMPILERS = (
