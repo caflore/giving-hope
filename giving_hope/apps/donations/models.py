@@ -22,7 +22,7 @@ class Donation(models.Model):
     last_name = models.CharField(max_length=128)
     email = models.EmailField(max_length=128)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
-    amount = MoneyField(decimal_places=2, default=0, default_currency='USD', max_digits=4)
+    amount = MoneyField(decimal_places=2, default=0, default_currency='USD', max_digits=10)
 
     transaction_date = models.DateTimeField(auto_now_add=True)
 

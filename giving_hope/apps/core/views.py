@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, ContactMessageForm
 
 def home(request):
     return render(request, 'core/home.html')
@@ -12,7 +12,15 @@ def about(request):
     return render(request, 'core/about.html')
 
 def contact(request):
-    return render(request, 'core/contact.html')
+    if request.method == 'POST':
+        form = ContactMessageForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Message submitted successfully!')
+            return redirect('contact')
+    else:
+        form = ContactMessageForm()
+    return render(request, 'core/contact.html', {'form': form})
 
 @login_required
 def profile(request):
